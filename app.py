@@ -87,7 +87,7 @@ def run_showui(image, query):
 
     global model
 
-    model = model.to("cuda")
+    model = model.to("cpu")
     
     text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     image_inputs, video_inputs = process_vision_info(messages)
@@ -98,7 +98,7 @@ def run_showui(image, query):
         padding=True,
         return_tensors="pt"
     )
-    inputs = inputs.to("cuda")
+    inputs = inputs.to("cpu")
 
     # Generate output
     generated_ids = model.generate(**inputs, max_new_tokens=128)
